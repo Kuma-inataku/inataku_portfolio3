@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1>This is an about page</h1>
+    <h1 class="text-center mb-6">- "J-ROCK CONSULTANT"とは？ -</h1>
   </div>
 </template>
