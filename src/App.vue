@@ -23,7 +23,9 @@
         </a>
       </div>
     <v-main>
-      <router-view />
+    <router-view />
+    <Loading v-show="loading"></Loading>
+    <Home v-show="!loading"></Home>
     </v-main>
     <v-footer padless color="#64B5F6" dark>
       <v-col class="text-center">
@@ -34,12 +36,25 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading'
+// import Home from './views/Home'
+
 export default {
   data(){
     return{
-      drawer:null
+      drawer:null,
+      loading:true
     }
-  }
+  },
+    mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1700);
+  },
+  components: {
+    Loading,
+    // Home,
+  },
 };
 </script>
 <style>
