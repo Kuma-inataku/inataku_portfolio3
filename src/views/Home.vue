@@ -24,9 +24,6 @@
             </v-btn>
           </div>
           <div class="d-flex justify-space-between" >
-            <!-- <v-btn text to="/about" elevation="2" width="200px" height="100px" color="#fff">
-              ABOUT
-            </v-btn> -->
             <v-btn text to="/about" elevation="2" outlined color="#E3F2FD" width="200px" height="100px">
             <v-icon>fas fa-microphone</v-icon>
               ABOUT
