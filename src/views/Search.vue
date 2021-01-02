@@ -1,134 +1,298 @@
 <template>
   <div>
-      <div v-show="loading">
-    <div class="fullview">
-      <div class="loading-spacer"></div>
-      <vue-loading 
-        type="spiningDubbles"
-        color="#64B5F6"
-        :size="{ width: '100px', height: '100px' }"
+    <div v-show="loading">
+      <div class="fullview">
+        <div class="loading-spacer"></div>
+        <vue-loading 
+          type="spiningDubbles"
+          color="#64B5F6"
+          :size="{ width: '100px', height: '100px' }"
+          >
+        </vue-loading>
+        <Loading v-show="loading"></Loading>
+      </div>
+    </div>
+    <v-container class="grey lighten-5">
+    <v-row no-gutters>
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <v-card
+          class="pa-2"
+          tile
         >
-      </vue-loading>
-      <Loading v-show="loading"></Loading>
-    </div>
-  </div>
+  <v-row justify="center">
+    <v-col>
+      <v-sheet
+        elevation="5"
+        rounded="xl"
+      >
+        <v-sheet
+          class="pa-3"
+          dark
+          rounded="t-xl"
+          color="#64B5F6"
+        >
+            <h3>カテゴリ検索</h3>
+          <!-- <v-btn icon>
+            <v-icon>mdi-content-save-cog-outline</v-icon>
+          </v-btn>
 
-    <div class="container">
-      <div class="l-search">
-        <div class="l-main">
+          <v-btn
+            class="ml-2"
+            icon
+          >
+            <v-icon>mdi-check-bold</v-icon>
+          </v-btn> -->
+        </v-sheet>
+
+        <div class="pa-4">
+          <v-chip-group
+            active-class="primary--text"
+            column
+          >
+            <v-chip
+              v-for="tag in tags"
+              :key="tag"
+            >
+              {{ tag }}
+            </v-chip>
+          </v-chip-group>
+        </div>
+      </v-sheet>
+    </v-col>
+  </v-row>
+  <v-row justify="center">
+    <v-col>
+      <v-sheet
+        elevation="5"
+        rounded="xl"
+      >
+        <v-sheet
+          class="pa-3"
+          dark
+          rounded="t-xl"
+          color="#64B5F6"
+        >
+          <h3>ランキング検索</h3>
+        </v-sheet>
+
+            <v-col
+                class="mx-auto"
+                max-width="300"
+              >
+                <v-list subheader>
+                  <v-list-item-group
+                    v-model="selectedItem"
+                    color="primary"
+                  >
+                    <v-list-item
+                      v-for="(ranking, i) in rankings"
+                      :key="i"
+                    >
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <div v-text="ranking.title"></div>
+                        </v-list-item-title>
+                        <v-list-item-subtitle>
+                          <div v-text="ranking.content"></div>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-col>
+            <!-- <v-list-item-content>
+              <v-list-item-title v-for="title in titles" :key="title">{{ title }}</v-list-item-title>
+              <v-list-item-subtitle v-for="content in contents" :key="content">{{ content }}></v-list-item-subtitle>
+            </v-list-item-content> -->
+
+              <!-- <v-chip-group
+            active-class="primary--text"
+            column
+          >
+            <v-chip
+              v-for="ranking in rankings"
+              :key="ranking"
+            >
+              {{ ranking }}
+            </v-chip>
+          </v-chip-group> -->
+      </v-sheet>
+    </v-col>
+  </v-row>
+        </v-card>
+      </v-col>
+      <v-col
+        cols="6"
+        md="8"
+      >
+        <v-card
+          class="pa-2"
+          tile
+        >
+        <div>
           <div class="container">
-        <h3>フリーワード検索</h3>
-      <div class="t-c-search">
-        <form action="">
-          <input type="text" class="t-word-search" placeholder="" name="freeword">
-        </form>
-        <button type="submit" class="t-word-submit">検索</button>
-      </div>
-      <!-- <router-link to="/page3" class="router">DEATAIL</router-link> -->
-      <div class="t-other_search">
-      </div>
-    </div>
-          <div class="l-result">  
-            <h2>検索結果</h2>
-            <!-- <p>「○○」の検索結果：<span class="l-result-num">5</span>件</p> -->
-            <!-- <div class="l-result-sub"> -->
-              <!-- <p><span class="l-result-num">5</span>件の内、<span class="l-result-num-1st">1</span>～<span class="l-result-num-1st">5</span>件を表示</p> -->
-            <!-- </div> -->
-          </div>
-            <div class="l-list">
-              <ul>
-                <li>
-                  <a href="#">
-                    <div class="l-content">
-                      <div class="l-img">
-                        <img src="static/images/top_image1.jpg" alt="">
-                      </div>
-                      <div class="l-detail">
-                        <h3 class="l-title">テスト</h3>
-                        <p>テストテストテストテストテストテストテストテストテストテストテスト</p>
-                        <p class="l-fav">"○○"いいね！</p>
-                        <!-- <img src="../images/good1.png" alt=""> -->
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="l-content">
-                      <div class="l-img">
-                        <!-- <img src="../images/top_image1.jpg" alt=""> -->
-                      </div>
-                      <div class="l-detail">
-                        <h3 class="l-title">テスト</h3>
-                        <p>テストテストテストテストテストテストテストテストテストテストテスト</p>
-                        <p class="l-fav">"○○"いいね！</p>
-                        <!-- <img src="../images/good1.png" alt=""> -->
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="l-content">
-                      <div class="l-img">
-                        <!-- <img src="../images/top_image1.jpg" alt=""> -->
-                      </div>
-                      <div class="l-detail">
-                        <h3 class="l-title">テスト</h3>
-                        <p>テストテストテストテストテストテストテストテストテストテストテスト</p>
-                        <p class="l-fav">"○○"いいね！</p>
-                        <!-- <img src="../images/good1.png" alt=""> -->
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
+            <h2>フリーワード検索</h2>
+            <div class="t-c-search">
+              <v-col cols="12">
+                <v-text-field
+                  label="キーワードを入力"
+                  placeholder=""
+                  filled
+                  rounded
+                ></v-text-field>
+              </v-col>
             </div>
-            <p class="l-page">前 | 1 | 2 | 3 | 4 | 5 | 次</p>
-        </div>
-        <div class="l-side">
-          <div class="category">
-            <h2>カテゴリ検索</h2>
-            <ul class="t-m-category">
-              <li>
-                <a href="">フェス 初心者</a>
-              </li>
-              <li>
-                <a href="">ライブハウス 初心者</a>
-              </li>
-              <li>
-                <a href="">フェス 注意点</a>
-              </li>
-              <li>
-                <a href="">ツーステ</a>
-              </li>
-              <li>
-                <a href="">ROCKIN'ON JAPAN</a>
-              </li>
-              <li>
-                <a href="">日本の米は世界一</a>
-              </li>
-            </ul>
           </div>
-          <div class="t-side">
-          <h3>「めっちゃE」ランキング検索</h3>
-          <ul class="t-s-search">
-            <li class="ranking_1">
-              <a href="#">【失敗しない！】初心者必見！フェスに持っていくもの10選！
-              </a>
-            </li>
-            <li class="ranking_2">
-              <a href="#"> 【これだけ気を付けよう！】フェスを楽しむための注意点3選！</a>
-            </li>
-            <li class="ranking_3">
-              <a href="#">【完全攻略！】初心者邦ロックロードマップ！</a>
-            </li>
-          </ul>
-        </div>
+          <v-divider></v-divider>
+          <h2 class="mt-4 mb-4">検索結果</h2>
+          <a href="#">
+            <v-card
+            :loading="loading"
+            class="mx-auto mt-2 mb-4"
+            max-width=""
+          >
+          <div class="d-flex">
+            <v-avatar
+            class="ma-3"
+            size="125"
+            tile>
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              ></v-img>
+            </v-avatar>
+            <div>
+              <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
+              <v-card-text>
+                <v-row
+                  align="center"
+                  class="mx-0"
+                >
+                  <v-rating
+                    :value="4.5"
+                    color="amber"
+                    dense
+                    half-increments
+                    readonly
+                    size="14"
+                  ></v-rating>
 
+                  <div class="grey--text ml-4">
+                    4.5 (413)
+                  </div>
+                </v-row>
+
+                <div class="my-4 subtitle-1">
+
+                </div>
+                <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
+                </div>
+              </v-card-text>
+              </div>
+            </div>
+          </v-card>
+          </a>
+          <a href="#">
+            <v-card
+            :loading="loading"
+            class="mx-auto mt-2 mb-4"
+            max-width=""
+          >
+          <div class="d-flex">
+            <v-avatar
+            class="ma-3"
+            size="125"
+            tile>
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              ></v-img>
+            </v-avatar>
+            <div>
+              <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
+              <v-card-text>
+                <v-row
+                  align="center"
+                  class="mx-0"
+                >
+                  <v-rating
+                    :value="4.5"
+                    color="amber"
+                    dense
+                    half-increments
+                    readonly
+                    size="14"
+                  ></v-rating>
+
+                  <div class="grey--text ml-4">
+                    4.5 (413)
+                  </div>
+                </v-row>
+
+                <div class="my-4 subtitle-1">
+
+                </div>
+                <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
+                </div>
+              </v-card-text>
+              </div>
+            </div>
+          </v-card>
+          </a>
+          <a href="#">
+            <v-card
+            :loading="loading"
+            class="mx-auto mt-2 mb-4"
+            max-width=""
+          >
+          <div class="d-flex">
+            <v-avatar
+            class="ma-3"
+            size="125"
+            tile>
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              ></v-img>
+            </v-avatar>
+            <div>
+              <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
+              <v-card-text>
+                <v-row
+                  align="center"
+                  class="mx-0"
+                >
+                  <v-rating
+                    :value="4.5"
+                    color="amber"
+                    dense
+                    half-increments
+                    readonly
+                    size="14"
+                  ></v-rating>
+
+                  <div class="grey--text ml-4">
+                    4.5 (413)
+                  </div>
+                </v-row>
+
+                <div class="my-4 subtitle-1">
+
+                </div>
+                <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
+                </div>
+              </v-card-text>
+              </div>
+            </div>
+          </v-card>
+          </a>
+          <p class="l-page">前 | 1 | 2 | 3 | 4 | 5 | 次</p>
         </div>
-      </div>
-    </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
   </div>
 </template>
 
@@ -136,11 +300,31 @@
 import Loading from '@/components/Loading'
 
 export default {
-  data(){
-    return{
+  data:() => ({
+    tags: [
+      'フェス 初心者',
+      'ライブハウス 初心者',
+      'フェス 注意点',
+      'ツーステ',
+      "ROCKIN'ON JAPAN",
+      '日本の米は世界一',
+      'Art',
+        ],
+    selectedItem: 1,
+    rankings: [
+        { title: '【失敗しない！】', content: '初心者必見！フェスに持っていくもの10選！' },
+        { title: '【これだけ気を付けよう！】', content: 'フェスを楽しむための注意点3選！' },
+        { title: '【完全攻略！】', content: '初心者邦ロックロードマップ！' },
+        ],
+    items: [
+        { text: 'Real-Time', icon: 'mdi-clock' },
+        { text: 'Audience', icon: 'mdi-account' },
+        { text: 'Conversions', icon: 'mdi-flag' },
+        ],
+    return:{
       loading:true
     }
-  },
+  }),
     mounted() {
     setTimeout(() => {
       this.loading = false;
@@ -151,82 +335,26 @@ export default {
     // Home,
   },
 };
-
+// export default {
+//   data(){
+//     return{
+//       loading:true
+//     }
+//   },
+//     mounted() {
+//     setTimeout(() => {
+//       this.loading = false;
+//     }, 1000);
+//   },
+//   components: {
+//     Loading,
+//     // Home,
+//   },
+// };
 </script>
 
 <style>
-/* ここからリストページ */
-.container{
-  color: #333;
-}
-.l-search{
-  display: flex;
-  flex-flow: row;
-  padding-top: 20px;
-}
-.l-main{
-  width: 70%;
-  margin: 0 80px 0 30px;
-}
-.l-result span{
-  font-weight: bold;
-}
-.l-result-sub{
-  display: flex;
-  justify-content: space-between;
-}
-.l-list li{
-  padding: 10px 0;
-  border-bottom: 3px dotted #ccc;
-  background: #fff;
-  margin: 10px 0;
-}
-.l-content{
-  display: flex;
-}
-.l-img img{
-  width: 200px;
-}
-.l-detail{
-  margin-left: 20px;
-}
-.l-title{
-  color: #0066CC;
-}
-.l-fav{
-  background: beige;
-  display: inline-block;
-}
-.l-page{
-  margin: 20px 0;
-  text-align: center;
-}
-/* ここからサイドバー */
-.l-side{
-  width: 30%;
-  margin: 0 30px 0 0;
-}
-/* ここからフリーワード検索 */
-.l-c-search{
-  border-bottom: 2px dotted #ccc;
-  background: #fff;
-}
-h2{
-  margin-bottom: 30px;
-}
-/* ここからカテゴリ検索 */
-.category{
-  border-bottom: 2px dotted #ccc;
-  background: #fff;
-  margin-top: 20px;
-}
-.t-m-category{
-  display: flex;
-  flex-wrap: wrap;
-}
-.t-m-category li{
-  background:rgb(230, 230, 230, 0.8);
-  margin: 10px;
-  padding: 10px;
+a{
+  text-decoration: none;
 }
 </style>
