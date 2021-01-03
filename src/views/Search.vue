@@ -12,7 +12,7 @@
         <Loading v-show="loading"></Loading>
       </div>
     </div>
-    <v-container class="grey lighten-5">
+  <v-container class="grey lighten-5">
     <v-row no-gutters>
       <v-col
         cols="12"
@@ -78,7 +78,6 @@
         >
           <h3>ランキング検索</h3>
         </v-sheet>
-
             <v-col
                 class="mx-auto"
                 max-width="300"
@@ -134,22 +133,47 @@
           tile
         >
         <div>
-          <div class="container">
-            <h2>フリーワード検索</h2>
-            <div class="t-c-search">
-              <v-col cols="12">
-                <v-text-field
-                  label="キーワードを入力"
-                  placeholder=""
-                  filled
-                  rounded
-                ></v-text-field>
-              </v-col>
-            </div>
+          <h2>フリーワード検索</h2>
+          <div class="t-c-search">
+            <v-col cols="12">
+              <v-text-field
+                v-model="keyword"
+                label="キーワードを入力"
+                placeholder=""
+                filled
+                rounded
+              ></v-text-field>
+            </v-col>
           </div>
           <v-divider></v-divider>
           <h2 class="mt-4 mb-4">検索結果</h2>
           <a href="#">
+            <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(new_user, key) in addUsers" :key="key">
+              <div class="d-flex">
+                <v-avatar class="ma-3" size="125" tile>
+                  <v-img :src="new_user.imageUrl2"></v-img>
+                </v-avatar>
+                <div>
+                  <v-card-title v-text="new_user.title"></v-card-title>
+                  <v-card-text>
+                    <v-row align="center" class="mx-0">
+                      <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
+
+                      </v-rating>
+                      <div class="grey--text ml-4">
+                        4.5 (413)
+                      </div>
+                    </v-row>
+                    <div class="my-4 subtitle-1">
+                    </div>
+                    <div v-text="new_user.content">
+                    </div>
+                  </v-card-text>
+                </div>
+              </div>
+            </v-card>
+          </a>
+          <!-- <a href="#">
             <v-card
             :loading="loading"
             class="mx-auto mt-2 mb-4"
@@ -165,7 +189,7 @@
               ></v-img>
             </v-avatar>
             <div>
-              <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
+              <v-card-title>Title Title Title Title</v-card-title>
               <v-card-text>
                 <v-row
                   align="center"
@@ -188,7 +212,7 @@
                 <div class="my-4 subtitle-1">
 
                 </div>
-                <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
+                <div>Contents Contents Contents Contents Contents Contents 
                 </div>
               </v-card-text>
               </div>
@@ -240,54 +264,40 @@
               </div>
             </div>
           </v-card>
-          </a>
-          <a href="#">
-            <v-card
-            :loading="loading"
-            class="mx-auto mt-2 mb-4"
-            max-width=""
-          >
-          <div class="d-flex">
-            <v-avatar
-            class="ma-3"
-            size="125"
-            tile>
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-              ></v-img>
-            </v-avatar>
-            <div>
-              <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
-              <v-card-text>
-                <v-row
-                  align="center"
-                  class="mx-0"
-                >
-                  <v-rating
-                    :value="4.5"
-                    color="amber"
-                    dense
-                    half-increments
-                    readonly
-                    size="14"
-                  ></v-rating>
-
-                  <div class="grey--text ml-4">
-                    4.5 (413)
-                  </div>
-                </v-row>
-
-                <div class="my-4 subtitle-1">
-
-                </div>
-                <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
-                </div>
-              </v-card-text>
-              </div>
-            </div>
-          </v-card>
-          </a>
-          <p class="l-page">前 | 1 | 2 | 3 | 4 | 5 | 次</p>
+          </a> -->
+          <!-- test test test test test test test test test test  -->
+          <!-- <div>
+            <h2>フリーワード検索</h2>
+              <div class="t-c-search">
+                <v-col cols="12">
+                  <v-text-field
+                    label="キーワードを入力"
+                    v-model="keyword"
+                    placeholder=""
+                    filled
+                    rounded
+                  ></v-text-field>
+                </v-col>
+              </div> -->
+                <!-- <table>
+                    <tr v-for="(user, key) in filteredUsers" :key="key">
+                        <td v-text="user.id"></td>
+                        <td v-text="user.name"></td>
+                        <td v-text="user.email"></td>
+                        <td>
+                          <img :src="user.imageUrl">
+                        </td>
+                    </tr>
+                </table> -->
+          <!-- </div> -->
+          <!-- test test test test test test test test test test  -->
+          <div class="text-center">
+            <v-pagination
+              v-model="page"
+              :length="4"
+              circle
+            ></v-pagination>
+          </div>
         </div>
         </v-card>
       </v-col>
@@ -308,23 +318,78 @@ export default {
       'ツーステ',
       "ROCKIN'ON JAPAN",
       '日本の米は世界一',
-      'Art',
         ],
     selectedItem: 1,
+
+    keyword: '',
+
     rankings: [
-        { title: '【失敗しない！】', content: '初心者必見！フェスに持っていくもの10選！' },
-        { title: '【これだけ気を付けよう！】', content: 'フェスを楽しむための注意点3選！' },
-        { title: '【完全攻略！】', content: '初心者邦ロックロードマップ！' },
+        { title: '【失敗しない！】',
+         content: '初心者必見！フェスに持っていくもの10選！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+          },
+        { title: '【これだけ気を付けよう！】',
+         content: 'フェスを楽しむための注意点3選！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【夏フェス必須！】',
+         content: 'あると便利なグッズを紹介！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【そもそも「邦ロック」とは？】',
+         content: '「邦ロックとはどんなジャンル？」について運営者個人的見解を述べます！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【これだけ気を付けよう！】',
+         content: 'フェスを楽しむための注意点3選！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【夏だけじゃない！】',
+         content: '寒いからこそフェス！屋内フェスの魅力をご紹介！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【どのフェス・イベントがいいの？】',
+         content: '初心者向けフェス・イベントをご紹介！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          },
+        { title: '【完全攻略！】',
+         content: '初心者邦ロックロードマップ！',
+         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          }
         ],
-    items: [
-        { text: 'Real-Time', icon: 'mdi-clock' },
-        { text: 'Audience', icon: 'mdi-account' },
-        { text: 'Conversions', icon: 'mdi-flag' },
-        ],
+        // test test test test test test test test test 
+      users: [
+          {
+            id: 1,
+            imageUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+              name: '【失敗しない！】',
+              email: '初心者必見！フェスに持っていくもの10選！',
+          },
+          {
+            id: 2,
+            imageUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+              name: '【これだけ気を付けよう！】',
+              email: 'フェスを楽しむための注意点3選！',
+          },
+          {
+            id: 3,
+            imageUrl: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+              name: '【これ大事！】',
+              email: 'ライブハウス攻略法',
+          },
+      ],
+      // test test test test test test test test test 
     return:{
-      loading:true
+      loading:true,
+      page:1
     }
   }),
+  // datan(){
+  //   return{
+  //     loading:true,
+  //     page:1
+  //   }
+  // },
     mounted() {
     setTimeout(() => {
       this.loading = false;
@@ -332,25 +397,54 @@ export default {
   },
   components: {
     Loading,
-    // Home,
   },
+    computed: {
+      filteredUsers: function() {
+        var users = [];
+        for(var i in this.users) {
+          var user = this.users[i];
+          if(user.name.indexOf(this.keyword) !== -1 ||
+            user.email.indexOf(this.keyword) !== -1) {
+            users.push(user);
+          }
+        }
+        return users;
+      },
+      addUsers: function() {
+        var rankings = [];
+        for(var i in this.rankings) {
+          var new_user = this.rankings[i];
+          if(new_user.title.indexOf(this.keyword) !== -1 ||
+            new_user.content.indexOf(this.keyword) !== -1) {
+            rankings.push(new_user);
+          }
+        }
+        return rankings;
+      }
+  }
 };
+
+// loading機能↓
+
 // export default {
-//   data(){
-//     return{
-//       loading:true
+  //   data(){
+    //     return{
+      //       loading:true
 //     }
 //   },
 //     mounted() {
-//     setTimeout(() => {
-//       this.loading = false;
+  //     setTimeout(() => {
+    //       this.loading = false;
 //     }, 1000);
 //   },
 //   components: {
-//     Loading,
+  //     Loading,
 //     // Home,
 //   },
 // };
+
+  // loading機能(完)
+  
 </script>
 
 <style>
