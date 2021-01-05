@@ -19,21 +19,25 @@
         <div class="contents_box">
           <div class="text-center mb-10">
             <v-btn text to="/search" block :elevation="2" x-large color="#64B5F6" height="70px" dark>
-              <v-icon>fas fa-search</v-icon>
+              <v-icon class="mr-2">fas fa-search</v-icon>
               GO TO SEARCH
             </v-btn>
           </div>
           <div class="d-flex justify-space-between" >
             <v-btn text to="/about" elevation="2" outlined color="#E3F2FD" width="200px" height="100px">
-            <v-icon>fas fa-microphone</v-icon>
+            <v-icon class="mr-2">fas fa-microphone</v-icon>
               ABOUT
             </v-btn>
             <v-btn text to="/" disabled :elevation="2" color="#E3F2FD" width="200px" height="100px">
-            <v-icon>fas fa-users</v-icon>
+            <v-icon class="mr-2">fas fa-users</v-icon>
             COMMUNITY
             </v-btn>
+            <v-btn text to="/" disabled :elevation="2" color="#E3F2FD" width="200px" height="100px">
+            <v-icon class="mr-2">fas fa-calendar-alt</v-icon>
+            FES-CALENDAR
+            </v-btn>
             <v-btn text to="/contact" :elevation="2" color="#E3F2FD" width="200px" height="100px">
-            <v-icon>far fa-envelope</v-icon>
+            <v-icon class="mr-2">far fa-envelope</v-icon>
             CONTACT
             </v-btn>
           </div>
