@@ -80,6 +80,7 @@
                           v-for="(ranking, i) in rankings"
                           :key="i"
                         >
+                        <div v-text="ranking.number" class="mr-2"></div>
                           <v-list-item-content>
                             <v-list-item-title>
                               <div v-text="ranking.title"></div>
@@ -121,6 +122,7 @@
             </div>
             <v-divider></v-divider>
             <h2 class="mt-4 mb-4">検索結果</h2>
+            <!-- <a :src="result.link"> -->
             <a href="#">
               <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
                 <div class="d-flex">
@@ -178,27 +180,32 @@ export default {
     keyword: '',
 
     rankings: [
-        { title: '【失敗しない！】',
-         content: '初心者必見！フェスに持っていくもの10選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+        { number: '1位',
+          title: '【失敗しない！】',
+          content: '初心者必見！フェスに持っていくもの10選！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
           },
-        { title: '【これだけ気を付けよう！】',
-         content: 'フェスを楽しむための注意点3選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+        { number: '2位',
+          title: '【これだけ気を付けよう！】',
+          content: 'フェスを楽しむための注意点3選！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
           },
-        { title: '【夏フェス必須！】',
-         content: 'あると便利なグッズを紹介！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+        { number: '3位',
+          title: '【夏フェス必須！】',
+          content: 'あると便利なグッズを紹介！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
           },
         ],
+        // 検索結果の内容↓
     results: [
         { title: '【失敗しない！】',
          content: '初心者必見！フェスに持っていくもの10選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+         imageUrl2: require('../assets/images/top_image4.jpg'),
+        //  link: require('./Page1')
           },
         { title: '【これだけ気を付けよう！】',
          content: 'フェスを楽しむための注意点3選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         imageUrl2: require('../assets/images/top_image4.jpg')
           },
         { title: '【夏フェス必須！】',
          content: 'あると便利なグッズを紹介！',
@@ -227,12 +234,14 @@ export default {
         ],
 
     return:{
+      // 読み込み時のloading追加
       loading:true,
       page:1
     }
   }),
 
     mounted() {
+      // loadingの時間指定
     setTimeout(() => {
       this.loading = false;
     }, 1000);
@@ -241,17 +250,20 @@ export default {
       Loading,
     },
     computed: {
-
        searchResult(){
+        // 空白入力を削除↓
         let searchWord = this.keyword.trim()
         if (searchWord === '') return this.results;
+        // 検索結果をフィルタリング
         return this.results.filter(result => {
             return result.title.includes(searchWord) ||
             result.content.includes(searchWord) 
           })
         }
       },
+
       methods:{
+        // 入力されたキーワードをハイライト化
         highLight(text){
           let searchWord = this.keyword.trim()
           if (searchWord === '') return text
