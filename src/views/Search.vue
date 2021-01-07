@@ -35,19 +35,8 @@
                     rounded="t-xl"
                     color="#64B5F6"
                   >
-                      <h3>カテゴリ検索</h3>
-                    <!-- <v-btn icon>
-                      <v-icon>mdi-content-save-cog-outline</v-icon>
-                    </v-btn>
-
-                    <v-btn
-                      class="ml-2"
-                      icon
-                    >
-                      <v-icon>mdi-check-bold</v-icon>
-                    </v-btn> -->
+                    <h3>キーワード検索</h3>
                   </v-sheet>
-
                   <div class="pa-4">
                     <v-chip-group
                       active-class="primary--text"
@@ -91,6 +80,7 @@
                           v-for="(ranking, i) in rankings"
                           :key="i"
                         >
+                        <div v-text="ranking.number" class="mr-2"></div>
                           <v-list-item-content>
                             <v-list-item-title>
                               <div v-text="ranking.title"></div>
@@ -132,6 +122,7 @@
             </div>
             <v-divider></v-divider>
             <h2 class="mt-4 mb-4">検索結果</h2>
+            <!-- <a :src="result.link"> -->
             <a href="#">
               <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
                 <div class="d-flex">
@@ -139,7 +130,6 @@
                     <v-img :src="result.imageUrl2"></v-img>
                   </v-avatar>
                   <div>
-                    <!-- <v-card-title v-text="result.title"></v-card-title> -->
                     <v-card-title v-html="highLight(result.title)"></v-card-title>
                     <v-card-text>
                       <v-row align="center" class="mx-0">
@@ -151,133 +141,12 @@
                       </v-row>
                       <div class="my-4 subtitle-1">
                       </div>
-                      <!-- <div v-text="result.content"></div> -->
                       <div v-html="highLight(result.content)"></div>
                     </v-card-text>
                   </div>
                 </div>
               </v-card>
             </a>
-            <!-- <a href="#">
-              <v-card
-              :loading="loading"
-              class="mx-auto mt-2 mb-4"
-              max-width=""
-            >
-            <div class="d-flex">
-              <v-avatar
-              class="ma-3"
-              size="125"
-              tile>
-                <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                ></v-img>
-              </v-avatar>
-              <div>
-                <v-card-title>Title Title Title Title</v-card-title>
-                <v-card-text>
-                  <v-row
-                    align="center"
-                    class="mx-0"
-                  >
-                    <v-rating
-                      :value="4.5"
-                      color="amber"
-                      dense
-                      half-increments
-                      readonly
-                      size="14"
-                    ></v-rating>
-
-                    <div class="grey--text ml-4">
-                      4.5 (413)
-                    </div>
-                  </v-row>
-
-                  <div class="my-4 subtitle-1">
-
-                  </div>
-                  <div>Contents Contents Contents Contents Contents Contents 
-                  </div>
-                </v-card-text>
-                </div>
-              </div>
-            </v-card>
-            </a>
-            <a href="#">
-              <v-card
-              :loading="loading"
-              class="mx-auto mt-2 mb-4"
-              max-width=""
-            >
-            <div class="d-flex">
-              <v-avatar
-              class="ma-3"
-              size="125"
-              tile>
-                <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                ></v-img>
-              </v-avatar>
-              <div>
-                <v-card-title>【コロナ禍限定！？】無観客ライブとは？</v-card-title>
-                <v-card-text>
-                  <v-row
-                    align="center"
-                    class="mx-0"
-                  >
-                    <v-rating
-                      :value="4.5"
-                      color="amber"
-                      dense
-                      half-increments
-                      readonly
-                      size="14"
-                    ></v-rating>
-
-                    <div class="grey--text ml-4">
-                      4.5 (413)
-                    </div>
-                  </v-row>
-
-                  <div class="my-4 subtitle-1">
-
-                  </div>
-                  <div>コロナでライブやフェスがなくてガッカリ…。そんなあなたに「無観客ライブ」という選択肢をご紹介します！
-                  </div>
-                </v-card-text>
-                </div>
-              </div>
-            </v-card>
-            </a> -->
-
-            <!-- test test test test test test test test test test  -->
-
-            <!-- <div>
-              <h2>フリーワード検索</h2>
-                <div class="t-c-search">
-                  <v-col cols="12">
-                    <v-text-field
-                      label="キーワードを入力"
-                      v-model="keyword"
-                      placeholder=""
-                      filled
-                      rounded
-                    ></v-text-field>
-                  </v-col>
-                </div> -->
-            <!-- <table>
-                      <tr v-for="(user, key) in filteredUsers" :key="key">
-                          <td v-text="user.id"></td>
-                          <td v-text="user.name"></td>
-                          <td v-text="user.email"></td>
-                          <td>
-                            <img :src="user.imageUrl">
-                          </td>
-                      </tr>
-                  </table> -->
-
-            <!-- test test test test test test test test test test  -->
             <div class="text-center">
               <v-pagination
                 v-model="page"
@@ -311,27 +180,32 @@ export default {
     keyword: '',
 
     rankings: [
-        { title: '【失敗しない！】',
-         content: '初心者必見！フェスに持っていくもの10選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+        { number: '1位',
+          title: '【失敗しない！】',
+          content: '初心者必見！フェスに持っていくもの10選！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
           },
-        { title: '【これだけ気を付けよう！】',
-         content: 'フェスを楽しむための注意点3選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+        { number: '2位',
+          title: '【これだけ気を付けよう！】',
+          content: 'フェスを楽しむための注意点3選！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
           },
-        { title: '【夏フェス必須！】',
-         content: 'あると便利なグッズを紹介！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+        { number: '3位',
+          title: '【夏フェス必須！】',
+          content: 'あると便利なグッズを紹介！',
+          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
           },
         ],
+        // 検索結果の内容↓
     results: [
         { title: '【失敗しない！】',
          content: '初心者必見！フェスに持っていくもの10選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+         imageUrl2: require('../assets/images/top_image4.jpg'),
+        //  link: require('./Page1')
           },
         { title: '【これだけ気を付けよう！】',
          content: 'フェスを楽しむための注意点3選！',
-         imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         imageUrl2: require('../assets/images/top_image4.jpg')
           },
         { title: '【夏フェス必須！】',
          content: 'あると便利なグッズを紹介！',
@@ -360,12 +234,14 @@ export default {
         ],
 
     return:{
+      // 読み込み時のloading追加
       loading:true,
       page:1
     }
   }),
 
     mounted() {
+      // loadingの時間指定
     setTimeout(() => {
       this.loading = false;
     }, 1000);
@@ -374,27 +250,20 @@ export default {
       Loading,
     },
     computed: {
-      // filteredUsers: function() {
-      //   var users = [];
-      //   for(var i in this.users) {
-      //     var user = this.users[i];
-      //     if(user.name.indexOf(this.keyword) !== -1 ||
-      //       user.email.indexOf(this.keyword) !== -1) {
-      //       users.push(user);
-      //     }
-      //   }
-      //   return users;
-      // },
        searchResult(){
+        // 空白入力を削除↓
         let searchWord = this.keyword.trim()
         if (searchWord === '') return this.results;
+        // 検索結果をフィルタリング
         return this.results.filter(result => {
             return result.title.includes(searchWord) ||
             result.content.includes(searchWord) 
           })
         }
       },
+
       methods:{
+        // 入力されたキーワードをハイライト化
         highLight(text){
           let searchWord = this.keyword.trim()
           if (searchWord === '') return text
@@ -405,17 +274,6 @@ export default {
           })
         }
       },
-      // searchWord: function() {
-      //   var results = [];
-      //   for(var i in this.results) {
-      //     var result = this.results[i];
-      //     if(result.title.indexOf(this.keyword) !== -1 ||
-      //       result.content.indexOf(this.keyword) !== -1) {
-      //       results.push(result);
-      //     }
-      //   }
-      //   return results;
-      // }
 };
 
 // loading機能↓

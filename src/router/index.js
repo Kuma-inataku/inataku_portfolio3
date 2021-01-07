@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/search',
-    name: 'search',
+    name: 'Search',
     component: () => import('../views/Search.vue')
   },
   {
@@ -34,8 +34,13 @@ const routes = [
   {
     path: '/loading',
     name: 'Loading',
-    component: () => import( '../components/Loading.vue')
-  }
+    component: () => import(/* webpackChunkName: "contact" */ '../components/Loading.vue')
+  },
+  {
+    path: '/page1',
+    name: 'Page1',
+    component: () => import(/* webpackChunkName: "contact" */ '../views/Page1.vue')
+  },
 ]
 
 const router = new VueRouter({
