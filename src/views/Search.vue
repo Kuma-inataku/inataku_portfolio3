@@ -13,11 +13,11 @@
       </div>
     </div>
     <v-container class="grey lighten-5">
-      <v-row no-gutters>
+      <v-row>
         <v-col
-          cols="12"
-          sm="6"
-          md="4"
+          cols="6"
+          sm=""
+          md=""
         >
           <v-card
             class="pa-2"
@@ -122,9 +122,9 @@
             </div>
             <v-divider></v-divider>
             <h2 class="mt-4 mb-4">検索結果</h2>
-            <!-- <a :src="result.link"> -->
-            <a href="#">
               <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
+
+            <router-link text :to="result.url" id="active">
                 <div class="d-flex">
                   <v-avatar class="ma-3" size="125" tile>
                     <v-img :src="result.imageUrl2"></v-img>
@@ -145,12 +145,13 @@
                     </v-card-text>
                   </div>
                 </div>
+            </router-link>
+
               </v-card>
-            </a>
             <div class="text-center">
               <v-pagination
                 v-model="page"
-                :length="4"
+                :length="3"
                 circle
               ></v-pagination>
             </div>
@@ -201,35 +202,42 @@ export default {
         { title: '【失敗しない！】',
          content: '初心者必見！フェスに持っていくもの10選！',
          imageUrl2: require('../assets/images/top_image4.jpg'),
-        //  link: require('./Page1')
+         url: '/page1'
           },
         { title: '【これだけ気を付けよう！】',
          content: 'フェスを楽しむための注意点3選！',
-         imageUrl2: require('../assets/images/top_image4.jpg')
+         imageUrl2: require('../assets/images/top_image4.jpg'),
+         url: '/page2'
           },
         { title: '【夏フェス必須！】',
          content: 'あると便利なグッズを紹介！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page3'
           },
         { title: '【そもそも「邦ロック」とは？】',
          content: '「邦ロックとはどんなジャンル？」について運営者個人的見解を述べます！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page4'
           },
         { title: '【これだけ気を付けよう！】',
          content: 'フェスを楽しむための注意点3選！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page5'
           },
         { title: '【夏だけじゃない！】',
          content: '寒いからこそフェス！屋内フェスの魅力をご紹介！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page6'
           },
         { title: '【どのフェス・イベントがいいの？】',
          content: '初心者向けフェス・イベントをご紹介！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page7'
           },
         { title: '【完全攻略！】',
          content: '初心者邦ロックロードマップ！',
          imageUrl2: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+         url: '/page8'
           }
         ],
 
@@ -295,12 +303,18 @@ export default {
 //   },
 // };
 
-  // loading機能(完)
+// ここまでloading機能(完)
   
 </script>
 
 <style>
-a{
-  text-decoration: none;
+.v-application a{
+  /* text-decoration: none; */
+  /* font-weight: bold; */
+  color: #fff;
+}
+#active{
+  color: #333;
+  
 }
 </style>
