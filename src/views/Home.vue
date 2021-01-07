@@ -86,4 +86,9 @@
   max-width: 1000px;
   margin: 0 auto ;
 }
+.v-application a{
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+}
 </style>

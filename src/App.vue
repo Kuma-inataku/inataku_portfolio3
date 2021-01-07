@@ -5,7 +5,7 @@
     <!-- <v-app-bar color="primary" class="red--text" app> -->
       <!-- <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon> -->
       <v-toolbar-title>
-        <router-link text to="/" class="title">
+        <router-link text to="/">
         J-Rock Consultant
         </router-link>
       </v-toolbar-title>
@@ -71,7 +71,6 @@ export default {
 .v-application a{
   text-decoration: none;
   font-weight: bold;
-  /* background-color: red; */
   color: #fff;
 }
 </style>
