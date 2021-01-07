@@ -5,7 +5,9 @@
     <!-- <v-app-bar color="primary" class="red--text" app> -->
       <!-- <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon> -->
       <v-toolbar-title>
+        <router-link text to="/" class="title">
         J-Rock Consultant
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="d-flex justify-center">
@@ -65,5 +67,11 @@ export default {
     top: 45vh;
     left: 0;
     right: auto;
+}
+.v-application a{
+  text-decoration: none;
+  font-weight: bold;
+  /* background-color: red; */
+  color: #fff;
 }
 </style>
