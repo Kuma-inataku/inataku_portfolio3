@@ -15,15 +15,74 @@
     <v-container class="grey lighten-5">
       <v-row>
         <v-col
-          cols="6"
-          sm=""
-          md=""
+          cols="12"
+          md="8"
+          sm="12"
         >
           <v-card
             class="pa-2"
             tile
           >
-            <v-row justify="center">
+          <div>
+            <h2>フリーワード検索</h2>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="keyword"
+                  label="キーワードを入力"
+                  placeholder=""
+                  filled
+                  rounded
+                  type="text"
+                ></v-text-field>
+              </v-col>
+            <v-divider></v-divider>
+            <h2 class="mt-4 mb-4">検索結果</h2>
+              <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
+            <router-link text :to="result.url" id="active" class="text-decoration-none">
+                <div class="d-flex">
+                  <v-avatar class="ma-3" size="125" tile>
+                    <v-img :src="result.imageUrl2"></v-img>
+                  </v-avatar>
+                  <div>
+                    <v-card-title v-html="highLight(result.title)"></v-card-title>
+                    <v-card-text>
+                      <v-row align="center" class="mx-0">
+                        <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
+                        </v-rating>
+                        <div class="grey--text ml-4">
+                          4.5 (413)
+                        </div>
+                      </v-row>
+                      <div class="my-4 subtitle-1">
+                      </div>
+                      <div v-html="highLight(result.content)"></div>
+                    </v-card-text>
+                  </div>
+                </div>
+            </router-link>
+
+              </v-card>
+            <div class="text-center">
+              <v-pagination
+                v-model="page"
+                :length="3"
+                circle
+              ></v-pagination>
+            </div>
+          </div>
+          </v-card>
+        </v-col>
+                <v-col
+          cols="12"
+          md="4"
+          sm="12"
+        >
+          <v-card
+            class="pa-2"
+            tile
+          >
+
+            <!-- <v-row justify="center">
               <v-col>
                 <v-sheet
                   elevation="5"
@@ -52,7 +111,8 @@
                   </div>
                 </v-sheet>
               </v-col>
-            </v-row>
+            </v-row> -->
+
             <v-row justify="center">
               <v-col>
                 <v-sheet
@@ -98,66 +158,6 @@
             </v-row>
           </v-card>
         </v-col>
-        <v-col
-          cols="6"
-          md="8"
-        >
-          <v-card
-            class="pa-2"
-            tile
-          >
-          <div>
-            <h2>フリーワード検索</h2>
-            <div class="t-c-search">
-              <v-col cols="12">
-                <v-text-field
-                  v-model="keyword"
-                  label="キーワードを入力"
-                  placeholder=""
-                  filled
-                  rounded
-                  type="text"
-                ></v-text-field>
-              </v-col>
-            </div>
-            <v-divider></v-divider>
-            <h2 class="mt-4 mb-4">検索結果</h2>
-              <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
-
-            <router-link text :to="result.url" id="active">
-                <div class="d-flex">
-                  <v-avatar class="ma-3" size="125" tile>
-                    <v-img :src="result.imageUrl2"></v-img>
-                  </v-avatar>
-                  <div>
-                    <v-card-title v-html="highLight(result.title)"></v-card-title>
-                    <v-card-text>
-                      <v-row align="center" class="mx-0">
-                        <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
-                        </v-rating>
-                        <div class="grey--text ml-4">
-                          4.5 (413)
-                        </div>
-                      </v-row>
-                      <div class="my-4 subtitle-1">
-                      </div>
-                      <div v-html="highLight(result.content)"></div>
-                    </v-card-text>
-                  </div>
-                </div>
-            </router-link>
-
-              </v-card>
-            <div class="text-center">
-              <v-pagination
-                v-model="page"
-                :length="3"
-                circle
-              ></v-pagination>
-            </div>
-          </div>
-          </v-card>
-        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -168,14 +168,16 @@ import Loading from '@/components/Loading'
 
 export default {
   data:() => ({
-    tags: [
-      'フェス 初心者',
-      'ライブハウス 初心者',
-      'フェス 注意点',
-      'ツーステ',
-      "ROCKIN'ON JAPAN",
-      '日本の米は世界一',
-        ],
+    // 「キーワード検索」ここから
+    // tags: [
+    //   'フェス 初心者',
+    //   'ライブハウス 初心者',
+    //   'フェス 注意点',
+    //   'ツーステ',
+    //   "ROCKIN'ON JAPAN",
+    //   '日本の米は世界一',
+    //     ],
+    // 「キーワード検索」ここまで
     selectedItem: 1,
 
     keyword: '',
