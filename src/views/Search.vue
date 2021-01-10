@@ -29,39 +29,46 @@
                 <v-text-field
                   v-model="keyword"
                   label="キーワードを入力"
-                  placeholder=""
                   filled
                   rounded
                   type="text"
                 ></v-text-field>
               </v-col>
             <v-divider></v-divider>
-            <h2 class="mt-4 mb-4">検索結果</h2>
-              <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
-            <router-link text :to="result.url" id="active" class="text-decoration-none">
-                <div class="d-flex">
-                  <v-avatar class="ma-3" size="125" tile>
-                    <v-img :src="result.imageUrl2"></v-img>
-                  </v-avatar>
-                  <div>
-                    <v-card-title v-html="highLight(result.title)"></v-card-title>
-                    <v-card-text>
-                      <v-row align="center" class="mx-0">
-                        <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
-                        </v-rating>
-                        <div class="grey--text ml-4">
-                          4.5 (413)
-                        </div>
-                      </v-row>
-                      <div class="my-4 subtitle-1">
-                      </div>
-                      <div v-html="highLight(result.content)"></div>
-                    </v-card-text>
-                  </div>
-                </div>
-            </router-link>
-
+            <h2 class="mt-4 mb-4">"{{ keyword }}"の検索結果</h2>
+            <v-container v-if="toggle">
+              <v-card class="grey lighten-5 text-center">
+                「フリーワード検索」にキーワードを入力後
+                <br>ここに検索結果が表示されます。
               </v-card>
+            </v-container>
+            <v-container v-else>
+              <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
+                <router-link text :to="result.url" id="active" class="text-decoration-none">
+                  <div class="d-flex">
+                    <v-avatar class="ma-3" size="125" tile>
+                      <v-img :src="result.imageUrl2"></v-img>
+                    </v-avatar>
+                    <div>
+                      <v-card-title v-html="highLight(result.title)"></v-card-title>
+                      <v-card-text>
+                        <v-row align="center" class="mx-0">
+                          <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
+                          </v-rating>
+                          <div class="grey--text ml-4">
+                            4.5 (413)
+                          </div>
+                        </v-row>
+                        <div class="my-4 subtitle-1">
+                        </div>
+                        <div v-html="highLight(result.content)"></div>
+                      </v-card-text>
+                    </div>
+                  </div>
+                </router-link>
+              </v-card>
+            </v-container>
+
             <div class="text-center">
               <v-pagination
                 v-model="page"
@@ -72,7 +79,7 @@
           </div>
           </v-card>
         </v-col>
-                <v-col
+        <v-col
           cols="12"
           md="4"
           sm="12"
@@ -168,6 +175,7 @@ import Loading from '@/components/Loading'
 
 export default {
   data:() => ({
+    toggle:true,
     // 「キーワード検索」ここから
     // tags: [
     //   'フェス 初心者',
@@ -282,8 +290,16 @@ export default {
           return text.replace(re,function(search){
             return '<span style="background-color:yellow; fontweight;bold">'+search + '</span>'
           })
-        }
-      },
+        },
+        // checkResult(toggle){
+        //   if(
+        //   ************************)
+        //   return true,
+        //   else(
+        //   ************************)
+        //   return false
+        // }
+      }
 };
 
 // loading機能↓
