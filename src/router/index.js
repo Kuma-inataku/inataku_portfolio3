@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Search from '../views/Search.vue'
+import Page1 from '../views/Page1.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +15,8 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../views/Search.vue')
+    // component: () => import(/* webpackChunkName: "about" */'../views/Search.vue')
+    component:Search
   },
   {
     path: '/about',
@@ -39,7 +42,7 @@ const routes = [
   {
     path: '/page1',
     name: 'Page1',
-    component: () => import(/* webpackChunkName: "contact" */ '../views/Page1.vue')
+    component:Page1
   },
   {
     path: '/page2',
@@ -79,8 +82,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // historyモード
+  // mode: 'history',
+  // base: process.env.BASE_URL,
   routes
 })
 

@@ -33,6 +33,7 @@
                   rounded
                   type="text"
                 ></v-text-field>
+
               </v-col>
             <v-divider></v-divider>
             <h2 class="mt-4 mb-4">"{{ keyword }}"の検索結果</h2>
@@ -43,7 +44,18 @@
               </v-card>
             </v-container>
             <v-container v-else>
-              <v-card :loading="loading" class="mx-auto mt-2 mb-4" v-for="(result, key) in searchResult" :key="key">
+              <v-card 
+              :loading="loading" 
+              class="mx-auto mt-2 mb-4" 
+              v-for="(result, key) in searchResult" 
+              :key="key"
+              >
+                <!-- <v-btn 
+                text :to="result.url"
+                id="active"
+                class="text-decoration-none"
+                block
+                > -->
                 <router-link text :to="result.url" id="active" class="text-decoration-none">
                   <div class="d-flex">
                     <v-avatar class="ma-3" size="125" tile>
@@ -52,20 +64,23 @@
                     <div>
                       <v-card-title v-html="highLight(result.title)"></v-card-title>
                       <v-card-text>
-                        <v-row align="center" class="mx-0">
+                        <div class="my-4 subtitle-1">
+                        </div>
+                        <div v-html="highLight(result.content)"></div>
+
+                        <v-row align="center" class="">
                           <v-rating :value="4.5" color="amber" dense half-increments readonly size="14">
                           </v-rating>
                           <div class="grey--text ml-4">
                             4.5 (413)
                           </div>
                         </v-row>
-                        <div class="my-4 subtitle-1">
-                        </div>
-                        <div v-html="highLight(result.content)"></div>
+
                       </v-card-text>
                     </div>
                   </div>
                 </router-link>
+                <!-- </v-btn> -->
               </v-card>
             </v-container>
 
@@ -175,7 +190,7 @@ import Loading from '@/components/Loading'
 
 export default {
   data:() => ({
-    toggle:true,
+    toggle:false,
     // 「キーワード検索」ここから
     // tags: [
     //   'フェス 初心者',
@@ -274,12 +289,11 @@ export default {
         if (searchWord === '') return this.results;
         // 検索結果をフィルタリング
         return this.results.filter(result => {
-            return result.title.includes(searchWord) ||
-            result.content.includes(searchWord) 
-          })
-        }
-      },
-
+        return result.title.includes(searchWord) ||
+        result.content.includes(searchWord) 
+      })
+    }
+  },
       methods:{
         // 入力されたキーワードをハイライト化
         highLight(text){

@@ -23,6 +23,22 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
+  <vue-star animate="animated rubberBand" color="#F05654">
+    <a slot="icon" class="fa fa-heart" @click="handleClick">ssa</a>
+  </vue-star>
+  <vue-star animate="animated shake" color="#5654F0">
+    <a slot="icon" class="fa fa-thumbs-up" @click="handleClick"></a>
+  </vue-star>
+    <!-- <div>
+      <v-btn class="ma-2" text icon color="blue lighten-2">
+        <v-icon>mdi-thumb-up</v-icon>
+      </v-btn>
+
+      <v-btn class="ma-2" text icon color="red lighten-2">
+        <v-icon>mdi-thumb-down</v-icon>
+      </v-btn>
+    </div> -->
+
       </v-col>
     </v-sheet>
 
@@ -36,13 +52,38 @@
 </template>
 
 <script>
+import VueStar from 'vue-star'
+
   export default {
+    components: {
+    VueStar
+  },
     data () {
 
 },
+    mounted() {
+    //いいね機能
+      this.$refs.ThumbsUp.$data.active = true;
+      console.log(this.$refs.ThumbsUp.$data);
+      },
+    methods:{
+      //いいね機能
+      handleClick () {
+      console.log(this.$refs.ThumbsUp.$data);
+      //do something
+    }
   }
+}
 </script>
 
 <style>
-
+#app .VueStar {
+      position: relative;
+      display: inline-block;
+    }
+    .VueStar__icon .fa {
+      font-size: 2em;
+      cursor: pointer;
+      /* color: coral; */
+    }
 </style>
