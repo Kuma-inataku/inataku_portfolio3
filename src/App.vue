@@ -13,6 +13,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="d-flex justify-center">
+        <!-- <v-btn text to="#about">About</v-btn> -->
         <v-btn text to="/about">About</v-btn>
         <v-btn text to="/contact">Contact</v-btn>
         <v-btn text to="/carendar">Carendar</v-btn>
@@ -50,7 +51,20 @@ export default {
       loading:true
     }
   },
+  watch:{
+    //#aboutでaboutコラムへ行く
+    // '$route':function(n, o){
+    //   if (n.hash.match(/^#/)){
+    //     document.getElementById(n.hash.replace(/^#/,'')).scrollIntoView()
+    //   }
+    //   console.log('new,old',[n.hash, o.hash])
+    // }
+  },
     mounted() {
+      //#aboutでaboutコラムへ行く
+      // if(this.$route.hash.match(/^#/)){
+      //   document.getElementById(this.$route.hash.replace(/^#/, '')).scrollIntoView()
+      // }
     setTimeout(() => {
       this.loading = false;
     }, 1700);
